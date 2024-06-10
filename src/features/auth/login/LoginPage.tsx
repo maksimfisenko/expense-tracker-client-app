@@ -1,6 +1,7 @@
 import { Credentials } from "../models";
 import { useLogin } from "./useLogin";
 import LoginForm from "./LoginForm";
+import { useNavigate } from "react-router-dom";
 
 const LoginPage = () => {
 
@@ -15,8 +16,15 @@ const LoginPage = () => {
         mutate(credentials, {
             onSuccess: (accessToken) => {
                 console.log('accessToken', accessToken)
+                navigate("/")
             }
         });
+    }
+
+    const navigate = useNavigate();
+
+    const handeNavigateToRegisterPage = () => {
+        navigate("/register")
     }
 
     return (
@@ -25,6 +33,7 @@ const LoginPage = () => {
             isLoading={isPending}
             errorMessage={error?.response?.data?.detail}
             onFormSubmit={handleLogin}
+            onLinkClick={handeNavigateToRegisterPage}
         />
     );
 }

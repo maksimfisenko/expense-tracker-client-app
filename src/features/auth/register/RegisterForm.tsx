@@ -28,9 +28,10 @@ interface RegisterFormProps {
     isLoading: boolean;
     errorMessage?: string;
     onFormSubmit: (credentials: Credentials) => void;
+    onLinkClick: () => void;
 }
 
-const RegisterForm = ({isError, isSuccess, isLoading, errorMessage, onFormSubmit} : RegisterFormProps) => {
+const RegisterForm = ({isError, isSuccess, isLoading, errorMessage, onFormSubmit, onLinkClick} : RegisterFormProps) => {
 
     const {
         register,
@@ -42,19 +43,19 @@ const RegisterForm = ({isError, isSuccess, isLoading, errorMessage, onFormSubmit
     });
 
     return (
-        <Flex flex="1" align="center" justify="center" textColor="green">
+        <Flex direction="row" flex="1" align="center" justify="center" textColor="mediumseagreen">
             <form onSubmit={handleSubmit(onFormSubmit)}>
-                <Center>
-                    <Stack borderColor="black">
-                        <Heading fontSize="2xl">Create a New Account</Heading>
+                <Center backgroundColor="white" maxW="1g" w="1g" shadow="1g" rounded="md" border="2px solid mediumseagreen">
+                    <Stack spacing="2" pt="16" pb="16" pl="16" pr="16">
+                        <Heading fontSize="2xl">Create a new account</Heading>
                         {isSuccess &&
-                            <Box>
-                                <Heading fontSize="2xl">Account successfully registered</Heading>
+                            <Box border="2px solid red" rounded="md" pt="1" pb="1" pl="1" pr="1" textAlign="center">
+                                <Heading fontSize="xl">Account successfully registered</Heading>
                             </Box>
                         }
                         {isError &&
-                            <Box>
-                                <Heading fontSize="2xl" color="red">{errorMessage}</Heading>
+                            <Box border="2px solid red" rounded="md" pt="1" pb="1" pl="1" pr="1" textAlign="center">
+                                <Heading fontSize="xl" color="red">{errorMessage}</Heading>
                             </Box>
                         }
                         <FormControl isInvalid={!!errors.username}>
@@ -73,7 +74,7 @@ const RegisterForm = ({isError, isSuccess, isLoading, errorMessage, onFormSubmit
                             <FormErrorMessage>{errors.confirmPassword?.message}</FormErrorMessage>
                         </FormControl>
                         <Button colorScheme="green" type="submit" isDisabled={isLoading}>Create account</Button>
-                        <Link>Already have an account?</Link>
+                        <Center><Link onClick={onLinkClick}>Already have an account?</Link></Center>
                     </Stack>
                 </Center>
             </form>

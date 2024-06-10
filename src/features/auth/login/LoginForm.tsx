@@ -17,9 +17,10 @@ interface LoginFormProps {
     isLoading: boolean;
     errorMessage?: string;
     onFormSubmit: (credentials: Credentials) => void;
+    onLinkClick: () => void;
 }
 
-const LoginForm = ({isError, isLoading, errorMessage, onFormSubmit} : LoginFormProps) => {
+const LoginForm = ({isError, isLoading, errorMessage, onFormSubmit, onLinkClick} : LoginFormProps) => {
 
     const {
         register,
@@ -31,14 +32,14 @@ const LoginForm = ({isError, isLoading, errorMessage, onFormSubmit} : LoginFormP
     });
 
     return (
-        <Flex flex="1" align="center" justify="center" textColor="green">
+        <Flex direction="row" flex="1" align="center" justify="center" textColor="mediumseagreen">
             <form onSubmit={handleSubmit(onFormSubmit)}>
-                <Center>
-                    <Stack borderColor="black">
+                <Center backgroundColor="white" maxW="1g" w="1g" shadow="1g" rounded="md" border="2px solid mediumseagreen">
+                    <Stack spacing="2" pt="16" pb="16" pl="16" pr="16">
                         <Heading fontSize="2xl">Sign in</Heading>
                         {isError &&
-                            <Box>
-                                <Heading fontSize="2xl" color="red">{errorMessage}</Heading>
+                            <Box border="2px solid red" rounded="md" pt="1" pb="1" pl="1" pr="1" textAlign="center">
+                                <Heading fontSize="xl" color="red">{errorMessage}</Heading>
                             </Box>
                         }
                         <FormControl isInvalid={!!errors.username}>
@@ -52,7 +53,7 @@ const LoginForm = ({isError, isLoading, errorMessage, onFormSubmit} : LoginFormP
                             <FormErrorMessage>{errors.password?.message}</FormErrorMessage>
                         </FormControl>
                         <Button colorScheme="green" type="submit" isDisabled={isLoading}>Sign in</Button>
-                        <Link>Don't have an account?</Link>
+                        <Center><Link onClick={onLinkClick}>Don't have an account?</Link></Center>
                     </Stack>
                 </Center>
             </form>

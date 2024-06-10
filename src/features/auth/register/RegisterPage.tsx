@@ -1,6 +1,7 @@
 import RegisterForm from "./RegisterForm";
 import { Credentials } from "../models";
 import { useRegisterUserAccount } from "./useRegisterUserAccount";
+import { useNavigate } from "react-router-dom";
 
 const RegisterPage = () => {
 
@@ -16,6 +17,12 @@ const RegisterPage = () => {
         mutate(credentials);
     }
 
+    const navigate = useNavigate();
+
+    const handleNavigateToLoginPage = () => {
+        navigate("/login")
+    }
+
     return (
         <RegisterForm 
             isError={isError} 
@@ -23,6 +30,7 @@ const RegisterPage = () => {
             isLoading={isPending}
             errorMessage={error?.response?.data?.detail}
             onFormSubmit={handleRegisterAccount}
+            onLinkClick={handleNavigateToLoginPage}
         />
     );
 }
