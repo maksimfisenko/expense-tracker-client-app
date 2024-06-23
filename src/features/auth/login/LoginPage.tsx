@@ -16,7 +16,7 @@ const LoginPage = () => {
         mutate(credentials, {
             onSuccess: (accessToken) => {
                 console.log('accessToken', accessToken)
-                navigate("/")
+                navigate("/sources")
             }
         });
     }
